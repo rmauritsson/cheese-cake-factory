@@ -1,6 +1,8 @@
 import React from 'react';
+import { HashRouter as Router, Route } from 'react-router-dom';
 import Navbar from './Navbar';
 import Catalogue from './Catalogue';
+import MealsDetails from '../containers/MealsDetails';
 
 class Wrapper extends React.Component {
   componentDidMount() {
@@ -10,7 +12,10 @@ class Wrapper extends React.Component {
     return (
       <>
         <Navbar />
-        <Catalogue />
+        <Router>
+          <Route exact path="/" component={Catalogue} />
+          <Route path="/meal/:id" component={MealsDetails} />
+        </Router>
       </>
     );
   }
