@@ -30,3 +30,17 @@ export const fetchMeals = () => dispatch => {
       dispatch(fetchMealsFailure(error.message));
     });
 };
+
+export const fetchMealsById = id => dispatch => {
+  dispatch(fetchMealsRequest());
+  // https://jsonplaceholder.typicode.com/users
+  axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
+    .then(response => {
+      const mealsList = response.data.meals;
+      // const mealsList = response.data;
+      dispatch(fetchMealsSuccess(mealsList));
+    })
+    .catch(error => {
+      dispatch(fetchMealsFailure(error.message));
+    });
+};
