@@ -7,7 +7,16 @@ const CatalogueItem = ({ meal }) => (
     <div className="card card-body bg-dark text-center h-100">
       <img className="w-100 mb-2" src={meal.strMealThumb} alt="meal Cover" />
       <h4 className="text-light card-title">{meal.strMeal}</h4>
-      <h6 className="text-light card-title">{meal.strArea}</h6>
+      <div className="badges">
+        <span className="badge badge-pill badge-primary m-2">
+          Area :
+          { meal.strArea }
+        </span>
+        <span className="badge badge-pill badge-success">
+          Category :
+          { meal.strCategory }
+        </span>
+      </div>
       <Link className="btn btn-outline-warning mt-5" to={`/meal/${meal.idMeal}`}>Find Out More</Link>
     </div>
   </div>

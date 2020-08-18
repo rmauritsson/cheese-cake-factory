@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {
-  FETCH_MEALS_REQUEST, FETCH_MEALS_SUCCESS, FETCH_MEALS_FAILURE,
+  FETCH_MEALS_REQUEST, FETCH_MEALS_SUCCESS, FETCH_MEALS_FAILURE, FETCH_MEAL_BY_ID,
 } from './types';
 
 export const fetchMealsRequest = () => ({
@@ -12,6 +12,11 @@ export const fetchMealsSuccess = mealsList => ({
   payload: mealsList,
 });
 
+export const fetchMealByIdSuccess = meal => ({
+  type: FETCH_MEAL_BY_ID,
+  payload: meal,
+});
+
 export const fetchMealsFailure = error => ({
   type: FETCH_MEALS_FAILURE,
   payload: error,
@@ -19,7 +24,6 @@ export const fetchMealsFailure = error => ({
 
 export const fetchMeals = () => dispatch => {
   dispatch(fetchMealsRequest());
-  // https://jsonplaceholder.typicode.com/users
   axios.get('https://www.themealdb.com/api/json/v1/1/search.php?s=')
     .then(response => {
       const mealsList = response.data.meals;
@@ -31,16 +35,13 @@ export const fetchMeals = () => dispatch => {
     });
 };
 
-export const fetchMealsById = id => dispatch => {
+export const fetchMealsById = id => async dispatch => {
   dispatch(fetchMealsRequest());
-  // https://jsonplaceholder.typicode.com/users
-  axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
-    .then(response => {
-      const mealsList = response.data.meals;
-      // const mealsList = response.data;
-      dispatch(fetchMealsSuccess(mealsList));
-    })
-    .catch(error => {
-      dispatch(fetchMealsFailure(error.message));
-    });
+  try {
+    // fetch data from a url endpoint
+    const mealsList = await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+    dispatch(fetchMealByIdSuccess(mealsList.data.meals[0]));
+  } catch (error) {
+    dispatch(fetchMealsFailure(error.message));
+  }
 };
