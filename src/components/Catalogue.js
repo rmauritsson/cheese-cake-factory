@@ -14,7 +14,6 @@ const Catalogue = ({ mealsData, fetchMeals }) => {
     <div className="container mt-4">
       <div className="row">
         {
-          // console.log(mealsData)
           mealsData.mealsList.map(meal => <CatalogueItem key={meal.idMeal} meal={meal} />)
         }
       </div>
@@ -23,12 +22,11 @@ const Catalogue = ({ mealsData, fetchMeals }) => {
 };
 
 Catalogue.propTypes = {
-  mealsData: PropTypes.arrayOf(PropTypes.object),
+  mealsData: PropTypes.shape([]).isRequired,
   fetchMeals: PropTypes.func,
 };
 
 Catalogue.defaultProps = {
-  mealsData: [],
   fetchMeals: () => {},
 };
 

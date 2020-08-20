@@ -1,5 +1,5 @@
 import {
-  FETCH_MEALS_REQUEST, FETCH_MEALS_SUCCESS, FETCH_MEALS_FAILURE, FETCH_MEAL_BY_ID,
+  LOADING_STATUS, FETCH_MEALS_SUCCESS, FETCH_MEALS_FAILURE, FETCH_MEAL_BY_ID,
 } from '../actions/types';
 
 const initialState = {
@@ -11,7 +11,7 @@ const initialState = {
 
 const catalogueReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_MEALS_REQUEST: return { ...state, loading: true };
+    case LOADING_STATUS: return { ...state, loading: true };
     case FETCH_MEALS_SUCCESS: return {
       ...state,
       loading: false,

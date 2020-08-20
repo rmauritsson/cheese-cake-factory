@@ -4,3 +4,15 @@
 .badges {
   height:50px;
 }
+
+.catalogueBtn {
+  position: relative;
+  bottom: 0;
+  height: 60px;
+  padding: 14px 0;
+  font-weight: bold;
+}
+
+button a {
+  color: #ffc107;
+}

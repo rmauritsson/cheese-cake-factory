@@ -19,7 +19,6 @@ const MealsDetails = ({ match, fetchMealsById, selectedMeal }) => {
         string.push(li);
       }
     }
-
     return string;
   };
 
@@ -58,7 +57,7 @@ const MealsDetails = ({ match, fetchMealsById, selectedMeal }) => {
         <div className="col-md-12 mb-5">
           <h2 className="mb-4">
             { selectedMeal.strMeal }
-            Ingredients
+            <span> Ingredients</span>
           </h2>
           <ul className="list-group">
             { renderIngredients() }
